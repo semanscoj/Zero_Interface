@@ -1,0 +1,185 @@
+[{
+  	"checks":["Computer","Logic"],
+	"Marks": "3",
+	"Complex Action": "Format Device",
+	"Test": "Computer + LOG [Sleaze] vs. WIL + Firewall",
+	"Note": "Device is Formatted on next Reboot",
+	"Limit": "Sleaze",
+	"Function": "Device Manipulation"
+}, {
+ 	"checks":["Logic","Computer"],
+	"Marks": "3",
+	"Complex Action": "Reboot Device",
+	"Test": "Computer + LOG [Data Proc.] vs. WIL + Firewall",
+	"Note": "Dumpshock. Can\u2019t reboot if linklocked",
+	"Limit": "Data Proc.",
+	"Function": "Device Manipulation"
+}, {
+ 	"checks":["Hacking","Int"],
+	"Marks": "1",
+	"Complex Action": "Spoof Command",
+	"Test": "Hacking + INT [Sleaze] vs. LOG + Firewall",
+	"Note": "Send command as though Owner",
+	"Limit": "Sleaze",
+	"Function": "Device Manipulation"
+}, {
+ 	"checks":["Software","Logic"],
+	"Marks": "3",
+	"Complex Action": "Garbage In/Out",
+	"Test": "Software + LOG [Sleaze] vs. LOG + Firewall",
+	"Note": "Change command result (Pulling Trigger ejects)",
+	"Limit": "Sleaze",
+	"Function": "Device Manipulation"
+}, {
+ 	"checks":["Hacking","Logic"],
+	"Marks": "1",
+	"Complex Action": "Crack File",
+	"Test": "Hacking + LOG [Attack] vs. 2 * Protection Rating",
+	"Note": "Remove File Protection",
+	"Limit": "Attack",
+	"Function": "File Manipulation"
+}, {
+ 	"checks":["Software","Int"],
+	"Marks": "-",
+	"Complex Action": "Disarm Data Bomb",
+	"Test": "Software + INT [Firewall] vs. 2 * Data Bomb Rating",
+	"Note": "Triggers Data Bomb on failure",
+	"Limit": "Firewall",
+	"Function": "File Manipulation"
+}, {
+ 	"checks":["Computer","Logic"],
+	"Marks": "1",
+	"Complex Action": "Edit File",
+	"Test": "Computer + LOG [Data Proc.] vs. INT + Firewall",
+	"Note": "Create, Change, Copy, Delete or Protect any File",
+	"Limit": "Data Proc.",
+	"Function": "File Manipulation"
+}, {
+  	"checks":["Software","Logic"],
+	"Marks": "1",
+	"Complex Action": "Set Data Bomb",
+	"Test": "Software + LOG [Sleaze] vs. 2 * Data Bomb Rating",
+	"Note": "Choose Ratiing. Does (Rating)D6 Matrix DV",
+	"Limit": "Sleaze",
+	"Function": "File Manipulation"
+}, {
+  	"checks":["Computer","Int"],
+	"Marks": "-",
+	"Complex Action": "Matrix Perception",
+	"Test": "Computer + INT [Data Proc.] (vs. LOG + Sleaze)",
+	"Note": "Opposed if target is running silent",
+	"Limit": "Data Proc.",
+	"Function": "Information Gathering"
+}, {
+  	"checks":["Electronic Warfare","Int"],
+	"Marks": "1",
+	"Complex Action": "Snoop",
+	"Test": "Electr. Warf. + INT [Sleaze] vs. LOG + Firewall",
+	"Note": "View/Record traffic to/from Marked Device",
+	"Limit": "Sleaze",
+	"Function": "Information Gathering"
+}, {
+  	"checks":["Computer","Int"],
+	"Marks": "2",
+	"Complex Action": "Trace Icon",
+	"Test": "Computer + INT [Data Proc.] vs. WIL + Sleaze",
+	"Note": "Locate Physical Location of device/persona",
+	"Limit": "Data Proc.",
+	"Function": "Information Gathering"
+}, {
+  	"checks":["Cybercombat","Logic"],
+	"Marks": "-",
+	"Complex Action": "Brute Force Attack",
+	"Test": "Cybercombat + LOG [Attack] vs. WIL + Firewall",
+	"Note": "+1 Mark. Optional +1 Matrix DV per 2 Net Hits",
+	"Limit": "Attack",
+	"Function": "Mark Manipulation"
+}, {
+  	"checks":["Cybercombat","Logic"],
+	"Marks": "-",
+	"Complex Action": "Brute Force Grid Hop",
+	"Test": "Cybercombat + LOG [Attack] vs. 4 (Local) or 6 (Global)",
+	"Note": "Hop to Grid you don\u2019t have Access to",
+	"Limit": "Attack",
+	"Function": "Mark Manipulation"
+}, {
+  	"checks":["Computer","Logic"],
+	"Marks": "3",
+	"Complex Action": "Erase Mark",
+	"Test": "Computer + LOG [Attack] vs. WIL + Firewall",
+	"Note": "Remove Marks one single icon from single icon",
+	"Limit": "Attack",
+	"Function": "Mark Manipulation"
+}, {
+  	"checks":["Hacking","Logic"],
+	"Marks": "-",
+	"Complex Action": "Hack on the Fly",
+	"Test": "Hacking + LOG [Sleaze] vs. INT + Firewall",
+	"Note": "+1 Mark. +1 Matrix Perception Hit per 2 Net Hits",
+	"Limit": "Sleaze",
+	"Function": "Mark Manipulation"
+}, {
+  	"checks":["Hacking","Logic"],
+	"Marks": "-",
+	"Complex Action": "Hack on the Fly Grid Hop",
+	"Test": "Hacking + LOG [Sleaze] vs. 4 (Local) or 6 (Global)",
+	"Note": "Hop to Grid you don\u2019t have Access to",
+	"Limit": "Sleaze",
+	"Function": "Mark Manipulation"
+}, {
+  	"checks":["Cybercombat","Logic"],
+	"Marks": "1",
+	"Complex Action": "Crash Program",
+	"Test": "Cybercombat + LOG [Attack] vs. INT + Firewall",
+	"Note": "Crash a specific program until Reboot",
+	"Limit": "Attack",
+	"Function": "Matrix Combat"
+}, {
+  	"checks":["Cybercombat","Logic"],
+	"Marks": "-",
+	"Complex Action": "Data Spike",
+	"Test": "Cybercombat + LOG [Attack] vs. INT + Firewall",
+	"Note": "DV = Attack + Net Hits + 2 * Marks",
+	"Limit": "Attack",
+	"Function": "Matrix Combat"
+}, {
+  	"checks":[],
+	"Marks": "1",
+	"Complex Action": "Enter/Exit Host",
+	"Test": "-------------------------------------------------------",
+	"Note": "Exit Host to where you entered from",
+	"Limit": "Data Proc.",
+	"Function": "Miscellaneous"
+}, {
+  	"checks":[],
+	"Marks": "-",
+	"Complex Action": "Grid Hop",
+	"Test": "-------------------------------------------------------",
+	"Note": "Must have permission, must leave host first",
+	"Limit": "Data Proc.",
+	"Function": "Miscellaneous"
+}, {
+  	"checks":["Electronic Warfare","Int"],
+	"Marks": "0",
+	"Complex Action": "Hide",
+	"Test": "Electr. Warf. + INT [Sleaze] vs. INT + Data Proc.",
+	"Note": "Disappear from target that hasn\u2019t Marked you",
+	"Limit": "Sleaze",
+	"Function": "Miscellaneous"
+}, {
+  	"checks":["Electronic Warfare","Logic"],
+	"Marks": "Owner",
+	"Complex Action": "Jam Signals",
+	"Test": "Electr. Warf. + LOG [Attack]",
+	"Note": "Add Hits to Noise Raiting for 100m",
+	"Limit": "Attack",
+	"Function": "Miscellaneous"
+}, {
+  	"checks":["Electronic Warfare","Logic"],
+	"Marks": "3",
+	"Complex Action": "Jump Into Rigged Device",
+	"Test": "Electr. Warf. + LOG [Data Proc.] vs. WIL + Firewal",
+	"Note": "No test if owner or have permission",
+	"Limit": "Data Proc.",
+	"Function": "Miscellaneous"
+}]
