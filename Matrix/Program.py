@@ -19,14 +19,13 @@ class Program:
             self.source = self.detail_dict['source']
         except Exception as e:
             print(e)
-        print('Loaded program', self.name)
 
     def load(self, deck_obj):
         if self.running_in:
             self.unload()
 
         for k, v in self.attribute_mod.items():
-            deck_obj.set(k, self.name, v)
+            deck_obj.set_attribute(k, self.name, v)
         self.running_in = deck_obj
 
     def unload(self):

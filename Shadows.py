@@ -7,8 +7,8 @@ from Gui.MenuBar import MenuBar
 from Gui.StatusBar import StatusBar
 import json
 from Matrix.Deck import Deck
-from Tab.Decker import Agent
 from Matrix.Program import Program
+from Matrix.Persona import Persona
 
 
 class State:
@@ -20,16 +20,16 @@ class State:
         self.decks = []
         self.programs = []
         self.load_data()
-        self.agent = Agent(self, self.decks[5])
+        self.persona = Persona(self)
         self.setup()
 
     def load_data(self):
-        with open('Matrix/decks.json', 'r') as f:
+        with open('Resources/decks.json', 'r') as f:
             self._decks = json.loads(f.read())
         for i in self._decks:
             self.decks.append(Deck(self, i))
 
-        with open('Matrix/programs.json', 'r') as f:
+        with open('Resources/programs.json', 'r') as f:
             program_data = json.loads(f.read())
 
         for i in program_data:

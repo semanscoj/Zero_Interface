@@ -2,9 +2,9 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk
 from Matrix.Deck import DeckManager
-from Utils.Attributes import AttributeInterface
 import json
 from tkinter import messagebox
+from collections import OrderedDict
 
 
 class Decker(ttk.Frame):
@@ -37,13 +37,12 @@ class Decker(ttk.Frame):
 
     def bind_to_selection(self, new=None):
         if new:
-            self.state.agent.deck.clear_binds()
-            self.state.agent.deck = new
+            self.state.persona.deck.clear_binds()
+            self.state.persona.deck = new
 
         for i in self.interface_binds:
-            i(self.state.agent)
-            i(self.state.agent.deck)
-        self.state.agent.update()
+            self.state.persona.view(i)
+        self.state.persona.update()
 
     def deck_selector(self):
         top = Frame(self, relief=RAISED, borderwidth=3)
@@ -52,9 +51,25 @@ class Decker(ttk.Frame):
         label = Label(top, text='Select Device:')
         label.pack(side=LEFT, expand=True)
 
+        radios = []
+
+        for k , v in OrderedDict([('Meatsuit', 0), ('Cold Sim', 0), ('Hot Sim', 2)]).items():
+            temp = Radiobutton(top, text=k, value=k, command=lambda k=k, v=v: self.set_mode(k, v))
+            radios.append(temp)
+            temp.pack(side=LEFT, expand=True)
+        radios[0].invoke()
+
         base = StringVar()
         self.device_selector = OptionMenu(top, base, *self.manager.deck_names(), command=lambda e, base=base: self.change_device(base.get()))
         self.device_selector.pack(side=LEFT, expand=True)
+
+    def set_mode(self, key, value):
+        ignore = ["Logic", 'Int', 'Will']
+
+        for i in self.state.persona.agent.get_all_attributes():
+            if i not in ignore:
+                self.state.persona.agent.set_attribute(i, 'mode', value)
+        self.bind_to_selection()
 
     def change_device(self, name):
         device = self.manager.get_by_name(name)
@@ -75,7 +90,7 @@ class Decker(ttk.Frame):
 
         command_frame = Frame(self, relief=RAISED, borderwidth=3)
 
-        with open('Matrix/commands.json', 'r') as f:
+        with open('Resources/commands.json', 'r') as f:
             data = json.loads(f.read())
 
         data = sorted(data, key=lambda k: k['Complex Action'])
@@ -126,11 +141,12 @@ class Decker(ttk.Frame):
         checks = self.command_data[key]['checks']
 
         for i in checks:
-            agent_value += self.state.agent.sum(i)
-            deck_value += self.state.agent.deck.sum(i)
+            agent_value += self.state.persona.agent.sum(i)
+            deck_value += self.state.persona.deck.sum(i)
+
+        print(key, agent_value + deck_value)
 
         self.update_label(key, agent_value + deck_value)
-
 
     def matrix_skills(self):
         skills = ["Cybercombat", "Electronic Warfare", "Hacking", "Computer", "Hardware", "Software", "Logic",
@@ -194,7 +210,6 @@ class Decker(ttk.Frame):
         if type(svar) == OptionMenu:
             print('got option menu item')
         elif type(svar) == StringVar:
-            print('get')
             value = svar.get()
             svar.set(value)
         elif type(svar) == int:
@@ -202,30 +217,8 @@ class Decker(ttk.Frame):
         else:
             print('error in set_base', key, svar)
             return
-        self.state.agent.deck.set_attribute(key, 'Base', value)
+        self.state.persona.deck.set_attribute(key, 'Base', value)
 
     def update_label(self, key, val):
         if key in self.labels:
             self.labels[key]['text'] = self.display_template % (key, val)
-
-
-class Agent(AttributeInterface):
-    def __init__(self, state, deck):
-        self.state = state
-        self.skills = ["Cybercombat", "Electronic Warfare", "Hacking", "Computer", "Hardware", "Software", "Logic",
-                       "Int", "Will"]
-        AttributeInterface.__init__(self, 'attributes', self.skills)
-        self.deck = deck
-        self.setup()
-
-    def setup(self):
-        print('loading skills..')
-        with open('Matrix/skills.json', 'r') as f:
-            data = json.loads(f.read())
-
-        for k, v in data.items():
-            self.set_attribute(k, 'Base', v)
-        #self.listen(self.deck.update)
-
-    def equip(self):
-        print('equiping')

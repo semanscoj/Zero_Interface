@@ -17,6 +17,10 @@ class AttributeInterface:
             except Exception as e:
                 print(e)
 
+    def add_attribute(self, key):
+        if key not in self._attributes:
+            self._attributes[key] = AttributeState(key)
+
     def set_attribute(self, key, name, val):
         self._attributes[key].set(name=name, val=val)
 
@@ -25,6 +29,9 @@ class AttributeInterface:
             return self._attributes[key].calc_val()
         else:
             return 0
+
+    def get_all_attributes(self):
+        return self._attributes.keys()
 
     def get_attribute(self, key):
         if key in self._attributes:

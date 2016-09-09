@@ -7,10 +7,6 @@ class DeckManager:
         self.state = state
         self._decks = None
         self.programs = []
-        self.setup()
-
-    def setup(self):
-        print('looking in', os.getcwd(), 'for decks.json')
 
     def deck_names(self, print_now=False, pre='', post=''):
         for i in self.state.decks:
@@ -50,6 +46,16 @@ class Deck(AttributeInterface):
             except:
                 print('Got non number in array')
                 self.array = range(1, 5)
+
+        with open('Resources/deck_mods.json', 'r') as f:
+            mods = json.loads(f.read())
+
+        for mod in mods:
+            name = mod['name']
+            changes = mod['mods']
+            for k, v in changes.items():
+                self.set_attribute(k, name, v)
+
 
     def get(self, key):
         if key in self.dict.keys():
